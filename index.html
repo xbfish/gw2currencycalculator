@@ -1,0 +1,185 @@
+<!doctype html>  
+<html lang="en">  
+<head>  
+	<title>A Simple Guild Wars 2 Currency Calculator</title>  
+	<meta name="description" content="A simple guild wars 2 currency calculator for calculation of in-game currency.">  
+	<meta name="author" content="Rabbit Web Factory, Willie Fang">  
+	<script src="jquery.js"></script>
+	<style>
+	html{
+		margin: 0, auto;
+		padding: 0;
+	}
+	
+	body{
+		background: #000 url('wide_bg.jpg') no-repeat fixed center; 
+	}
+	
+	#container{
+		width: 40%;
+		height: 550px;
+		margin: auto;
+		background-color: #FFF;
+		opacity: 0.8;
+		filter:alpha(opacity=80); /* For IE8 and earlier */
+		border-radius: 10px;
+		border: 1px solid #565655;
+		color: #32322f;
+	}
+	
+	#header{
+		width: 100%;
+		margin: auto;
+		height: 150px;
+		#background-color: #000;
+		border-radius: 10px;
+		padding-top: 12px;
+	}
+	
+	#content{
+		width: 100%;
+		padding: 10px 8px 15px 8px;
+	}
+	
+	table{
+		margin: auto;
+	}
+	
+	table td{
+		height: 50px;
+	}
+	
+	input{
+		width: 45px;
+		height: 30px;
+		font-size: 2em;
+	}
+	
+	#operation{
+		padding-left: 43%;
+		height: 45px;
+	}
+	
+	#operation button{
+		float: left;
+		width: 65px;
+		
+	}
+	
+	#footer{
+		display: inline-block;
+		width: 98%;
+		color: #535352;
+	}
+	
+	#footer hr{
+		color: #CCC;
+	}
+	
+	a, a:visited{
+		color: #41b1f8;
+	}
+	
+	a:hover{
+		color: #0d90e4;
+	}
+	</style>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var totalGold = 0, totalSilver = 0, totalCopper = 0;
+			
+			$("#plus").click(function() {
+				var gold = $("#gold").val();
+				gold = parseInt(gold);
+				var silver = $("#silver").val();
+				silver = parseInt(silver);
+				var copper = $("#copper").val();
+				copper = parseInt(copper);
+				
+				totalCopper += copper;
+				var copperBringOver = Math.floor(totalCopper / 100);
+				if(copperBringOver >= 1){
+					totalSilver += copperBringOver;
+					totalCopper %= 100;
+				}
+				
+				
+				totalSilver += silver;
+				var silverBringOver = Math.floor(totalSilver / 100);
+				if(silverBringOver >= 1){
+					totalGold += silverBringOver;
+					totalSilver %= 100;
+				}
+				
+				totalGold += gold;
+				
+				$("#totalCopper").val(totalCopper);
+				$("#totalSilver").val(totalSilver);
+				$("#totalGold").val(totalGold);
+			});
+		});
+	</script>
+</head>  
+<body>  
+	<div id="container">
+		<div id="header">
+			<div style="float:left; width:170px; padding-left:20px;">
+				<img src="guildwars2_logo.png" alt="missing logo!" />
+			</div>
+			<div style="float:left; font:bold 28px Trebuchet; padding-top:50px;">
+				A Simple Guild Wars 2 Currency Calculator
+			</div>
+		</div>
+		
+		<div id="content">
+			<b>Enter the current in Current Amount to begin...</b>
+			<table border="0">
+				<tr>
+					<td align="right">Total Amount: </td>
+					<td>
+						<input type="text" id="totalGold" name="totalGold" disabled="disabled" /> 
+						<img src="gold.png" />
+					</td>
+					<td>
+						<input type="text" id="totalSilver" name="totalGold" disabled="disabled" />
+						<img src="silver.png" />
+					</td>
+					<td>
+						<input type="text" id="totalCopper" name="totalGold" disabled="disabled" />
+						<img src="copper.png" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Current Amount: </td>
+					<td>
+						<input type="text" id="gold" name="gold" value="0" />
+						<img src="gold.png" />
+					</td>
+					<td>
+						<input type="text" id="silver" name="silver" value="0" />
+						<img src="silver.png" />
+					</td>
+					<td>
+						<input type="text" id="copper" name="copper" value="0" />
+						<img src="copper.png" />
+					</td>
+				</tr>
+			</table>
+			
+			<div id="operation">
+				<button id="reset">Reset</button>
+				<button id="plus">+</button>
+				<button id="minus">-</button>
+			</div>
+			
+			<div id="footer">
+				<hr />
+				<center>
+				Developed by <a href="http://xbfish.com">Willie Fang</a> from <a href="http://rabbitwebfactory.com">Rabbit Web Factory</a>
+				</center>
+			</div>
+		</div>
+	</div>
+</body>  
+</html>  

@@ -1,0 +1,11 @@
+echo "All your change will be delete and replaced with the copy on Github"
+echo "Are you sure? [yes/no]"
+
+read answer
+
+if [ $answer == yes ]
+then
+	git reset --hard HEAD
+	git clean -f -d
+	git pull origin master
+fi
