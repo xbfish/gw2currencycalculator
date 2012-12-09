@@ -1,0 +1,79 @@
+html{
+	margin: 0, auto;
+	padding: 0;
+}
+
+body{
+	background: #000 url('wide_bg.jpg') no-repeat fixed center; 
+}
+
+#container{
+	width: 40%;
+	height: 450px;
+	margin: auto;
+	margin-top: 10%;
+	background-color: #FFF;
+	opacity: 0.8;
+	filter:alpha(opacity=80); /* For IE8 and earlier */
+	border-radius: 10px;
+	border: 1px solid #565655;
+	color: #32322f;
+}
+
+#header{
+	width: 100%;
+	margin: auto;
+	height: 150px;
+	#background-color: #000;
+	border-radius: 10px;
+	padding-top: 12px;
+}
+
+#content{
+	width: 100%;
+	padding: 10px 8px 15px 8px;
+}
+
+table{
+	margin: auto;
+}
+
+table td{
+	height: 50px;
+}
+
+input{
+	width: 45px;
+	height: 30px;
+	font-size: 2em;
+}
+
+#operation{
+	padding-left: 43%;
+	height: 45px;
+}
+
+#operation button{
+	float: left;
+	width: 65px;
+	font-size: 1em;
+}
+
+#footer{
+	display: inline-block;
+	width: 98%;
+	color: #535352;
+	font-size: 0.8em;
+}
+
+#footer hr{
+	color: #CCC;
+}
+
+a, a:visited{
+	color: #760963;
+}
+
+a:hover{
+	color: #0d90e4;
+}

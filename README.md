@@ -1,4 +1,6 @@
 gw2currencycalculator
 =====================
 
-Guild Wars 2 Currency Calculator
+A Simple Guild Wars 2 Currency Calculator to calculate in-game currency
+
+developed by Willie Fang

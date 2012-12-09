@@ -5,86 +5,7 @@
 	<meta name="description" content="A simple guild wars 2 currency calculator for calculation of in-game currency.">  
 	<meta name="author" content="Rabbit Web Factory, Willie Fang">  
 	<script src="jquery.js"></script>
-	<style>
-	html{
-		margin: 0, auto;
-		padding: 0;
-	}
-	
-	body{
-		background: #000 url('wide_bg.jpg') no-repeat fixed center; 
-	}
-	
-	#container{
-		width: 40%;
-		height: 550px;
-		margin: auto;
-		background-color: #FFF;
-		opacity: 0.8;
-		filter:alpha(opacity=80); /* For IE8 and earlier */
-		border-radius: 10px;
-		border: 1px solid #565655;
-		color: #32322f;
-	}
-	
-	#header{
-		width: 100%;
-		margin: auto;
-		height: 150px;
-		#background-color: #000;
-		border-radius: 10px;
-		padding-top: 12px;
-	}
-	
-	#content{
-		width: 100%;
-		padding: 10px 8px 15px 8px;
-	}
-	
-	table{
-		margin: auto;
-	}
-	
-	table td{
-		height: 50px;
-	}
-	
-	input{
-		width: 45px;
-		height: 30px;
-		font-size: 2em;
-	}
-	
-	#operation{
-		padding-left: 43%;
-		height: 45px;
-	}
-	
-	#operation button{
-		float: left;
-		width: 65px;
-		
-	}
-	
-	#footer{
-		display: inline-block;
-		width: 98%;
-		color: #535352;
-	}
-	
-	#footer hr{
-		color: #CCC;
-	}
-	
-	a, a:visited{
-		color: #41b1f8;
-	}
-	
-	a:hover{
-		color: #0d90e4;
-	}
-	</style>
-	
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var totalGold = 0, totalSilver = 0, totalCopper = 0;
@@ -104,7 +25,6 @@
 					totalCopper %= 100;
 				}
 				
-				
 				totalSilver += silver;
 				var silverBringOver = Math.floor(totalSilver / 100);
 				if(silverBringOver >= 1){
@@ -117,6 +37,75 @@
 				$("#totalCopper").val(totalCopper);
 				$("#totalSilver").val(totalSilver);
 				$("#totalGold").val(totalGold);
+			});
+			
+			$("#minus").click(function() {
+				var calculated = false;
+				var gold = $("#gold").val();
+				gold = parseInt(gold);
+				var silver = $("#silver").val();
+				silver = parseInt(silver);
+				var copper = $("#copper").val();
+				copper = parseInt(copper);
+				
+				if(gold > totalGold){
+					alert("Invalid amount!");
+				}else{
+					totalGold -= gold;
+					if(silver > totalSilver){
+						if(totalGold >= 1 && silver <= 99){
+							totalGold -= 1;
+							totalSilver += 100;
+							totalSilver -= silver;
+							calculated = true;
+						}else{
+							alert("Invalid amount!");
+						}
+					}else{
+						totalSilver -= silver;
+						calculated = true;
+					}
+					
+					if(calculated){
+						if(copper > totalCopper){
+							if(totalSilver >= 1 && copper <= 99){
+								totalSilver -= 1;
+								totalCopper += 100;
+								totalCopper -= copper;
+							}else{
+								alert("Invalid amount!");
+								calculated = false;
+							}
+						}else{
+							totalCopper -= copper;
+						}
+					}
+				}
+				
+				if(calculated){
+					$("#totalCopper").val(totalCopper);
+					$("#totalSilver").val(totalSilver);
+					$("#totalGold").val(totalGold);
+				}else{
+					$("#totalCopper").val("");
+					$("#totalSilver").val("");
+					$("#totalGold").val("");
+					totalGold = 0;
+					totalSilver = 0;
+					totalCopper = 0;
+				}
+			});
+			
+			$("#reset").click(function() {
+				totalCopper = 0;
+				totalSilver = 0;
+				totalGold = 0;
+				$("#totalCopper").val("");
+				$("#totalSilver").val("");
+				$("#totalGold").val("");
+				$("#copper").val("0");
+				$("#silver").val("0");
+				$("#gold").val("0");
 			});
 		});
 	</script>
@@ -133,7 +122,7 @@
 		</div>
 		
 		<div id="content">
-			<b>Enter the current in Current Amount to begin...</b>
+			<b>Enter the currency in Current Amount to begin...</b>
 			<table border="0">
 				<tr>
 					<td align="right">Total Amount: </td>
@@ -176,7 +165,11 @@
 			<div id="footer">
 				<hr />
 				<center>
-				Developed by <a href="http://xbfish.com">Willie Fang</a> from <a href="http://rabbitwebfactory.com">Rabbit Web Factory</a>
+				Mini <a href="https://github.com/xbfish/gw2currencycalculator">open source project</a> by <a href="http://xbfish.com">Willie Fang</a> from <a href="http://rabbitwebfactory.com">Rabbit Web Factory</a>
+				<br />
+				Report bugs at <a href="mailto:willie@rabbitwebfactory.com">willie@rabbitwebfactory.com</a>
+				<br />
+				<b>v1.0 beta</b>
 				</center>
 			</div>
 		</div>
